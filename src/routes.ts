@@ -5,4 +5,6 @@ const router = express.Router()
 
 router.get('/categories', categoriesController.index)
 
+router.get('/categorie/:id', categoriesController.show)
+
 export {router}
