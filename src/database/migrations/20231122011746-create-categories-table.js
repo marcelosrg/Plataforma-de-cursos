@@ -1,3 +1,4 @@
+
 'use strict';
 
 module.exports = {
@@ -9,20 +10,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
-
       name: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING
       },
       position: {
         allowNull: false,
-        type:Sequelize.DataTypes.INTEGER
+        unique: true,
+        type: Sequelize.DataTypes.INTEGER
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE
       },
-      update_at: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE
       }
@@ -30,6 +31,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-   await queryInterface.dropTable('categories')
+    await queryInterface.dropTable('categories')
   }
 };
