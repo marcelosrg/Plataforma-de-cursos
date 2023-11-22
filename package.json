@@ -14,6 +14,7 @@
     "@adminjs/sequelize": "~2.1.0",
     "@adminjs/upload": "~2.0.1",
     "adminjs": "~5.5.1",
+    "dotenv": "^16.3.1",
     "express": "~4.17.2",
     "express-formidable": "~1.2.0",
     "pg": "~8.7.1",
