@@ -41,7 +41,7 @@ export const AdminJsRouter = AdminJSExpress.buildAuthenticatedRouter(adminJs, {
   authenticate: async (email, password) => {
     const user = await User.findOne({ where: { email }})
 
-    if(user) {
+    if(user && user.role === 'admin') {
       const matched = await bcrypt.compare(password, user.password)
 
       if(matched) {
@@ -52,5 +52,9 @@ export const AdminJsRouter = AdminJSExpress.buildAuthenticatedRouter(adminJs, {
     return false
   },
   cookiePassword: 'senha-de-cookie'
+
+}, null, {
+  reasave: false,
+  saveUnitialized: false
 });
 
