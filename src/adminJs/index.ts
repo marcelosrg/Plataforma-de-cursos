@@ -35,4 +35,3 @@ export const adminJs = new AdminJS({
 
 export const AdminJsRouter = AdminJSExpress.buildRouter(adminJs);
 
-const test: string = "ma"
