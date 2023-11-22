@@ -8,14 +8,15 @@ import {
   TableRow,
   TableHead,
 } from "@adminjs/design-system";
-import { ApiClient } from "adminjs";
+import { ApiClient, useCurrentAdmin } from "adminjs";
 
 export default function Dashboard() {
   const api = new ApiClient();
+  const [currentAdmin] = useCurrentAdmin()
   const [resources, setResources] = useState<{ [key: string]: number }>();
   useEffect(() => {
     fetchDashboardData();
-  });
+  }, []);
 
   async function fetchDashboardData() {
     const res = await api.getDashboard();
@@ -23,7 +24,7 @@ export default function Dashboard() {
   }
   return (
     <section style={{ padding: "1.5rem" }}>
-      <H1>Seja bem-vindo!</H1>
+      <H1>Seja bem-vindo, {currentAdmin?.firstName}!</H1>
 
       <section style={{ backgroundColor: "#FFF", padding: "1.5rem" }}>
         <H2>Resumo</H2>
