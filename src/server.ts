@@ -14,6 +14,5 @@ app.listen(PORT, () =>{
      sequelize.authenticate().then(() => {
           console.log('db conectado com sucesso')
      })
-     console.log(`servidor iniciado com sucesso na porta: ${PORT}`)
 
 })
