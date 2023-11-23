@@ -5,7 +5,6 @@ import { getPaginationParams } from "../helpers/getPaginationParams";
 export const categoriesController = {
 
   // GET /categories
-
   index: async (req: Request, res: Response) => {
     const [page, perPage] = getPaginationParams(req.query);
 
