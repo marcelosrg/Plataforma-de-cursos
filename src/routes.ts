@@ -13,6 +13,8 @@ router.get('/courses/featured', coursesController.featured)
 
 router.get('/courses/newest', coursesController.newest)
 
+router.get('/courses/search', coursesController.search)
+
 router.get('/couses/:id', coursesController.show)
 
 export {router}
