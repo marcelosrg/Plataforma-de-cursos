@@ -1,11 +1,34 @@
-import { Favorite } from "../models"
+import { Favorite } from "../models";
 export const favoriteService = {
-	create: async (userId: number, courseId: number) => {
+  findByUserId: async (userId: number) => {
+     const favorite = await Favorite.findAll({
+          attributes: [[
+               'user_id', 'userId'
+          ]],
+          where: { userId: userId },
+          include: {
+               association: 'Course',
+               attributes: [
+                    'id',
+                    'name',
+                    'synopsis',
+                    ['thumbnail_url', 'thumbnailUrl']
+               ]
+
+          }
+     })
+
+     return favorite
+
+
+  },
+
+  create: async (userId: number, courseId: number) => {
     const favorite = await Favorite.create({
       userId,
-      courseId
-    })
+      courseId,
+    });
 
-    return favorite
+    return favorite;
   },
-}
+};

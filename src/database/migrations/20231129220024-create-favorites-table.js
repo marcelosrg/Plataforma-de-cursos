@@ -14,6 +14,7 @@ module.exports = {
       },
       course_id: {
         allowNull: false,
+        primaryKey: true, 
         type: Sequelize.DataTypes.INTEGER,
         references: { model: 'courses', key: 'id' },
         onUpdate: 'CASCADE',
