@@ -8,6 +8,8 @@ router.get('/categories', categoriesController.index)
 
 router.get('/categories/:id', categoriesController.show)
 
+router.get('/courses/featured', cousesController.featured)
+
 router.get('/couses/:id', cousesController.show)
 
 export {router}
