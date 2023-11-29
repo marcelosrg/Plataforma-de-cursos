@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userServices } from "../services/userServices";
+import { jwtService } from "../services/jwtService";
 
 export const authUserConstroller = {
   //POST /auth/register
@@ -31,4 +32,37 @@ export const authUserConstroller = {
       }
     }
   },
+
+
+  //POST /auth/register 
+
+  login: async(req: Request, res:Response) => {
+    const { email, password } = req.body
+    
+      try {
+        const user = await userServices.findByEmail(email)
+        if(!user) return res.status(404).json({ massage: 'E-mail não registrado.'})
+
+        user.checkPassword(password, (err, isSame)=> {
+          if(err) return res.status(400).json({ massage: err.message})
+
+          if(!isSame) return res.status(401).json({ massage: 'Senha incorreta'})
+
+          const payload = {
+            id: user.id,
+            firtName: user.firstName,
+            email: user.email 
+          } 
+          const token = jwtService.singToken(payload, '1d')
+
+          return res.json({ authenticated: true, ...payload, token})
+        })
+    
+        
+      } catch (err) {
+        if (err instanceof Error) {
+          return res.status(400).json({ message: err.message });
+        }
+      }
+  }
 };
