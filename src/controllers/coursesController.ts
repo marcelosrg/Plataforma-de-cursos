@@ -1,12 +1,24 @@
 import { Request, Response } from "express";
 import { courseService } from "../services/coursesService";
 
-export const cousesController = {
+export const coursesController = {
   // GET /courses/featured
   featured: async (req: Request, res: Response) => {
     try {
       const featuredCourses = await courseService.getRandomFeaturedCourses()
       return res.json(featuredCourses)
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message });
+      }
+    }
+  },
+
+  //GET /courses/newest
+  newest: async (req: Request, res: Response) => {
+    try {
+      const newestCourse = await courseService.getToptenNewest()
+    return res.json(newestCourse)
     } catch (err) {
       if (err instanceof Error) {
         return res.status(400).json({ message: err.message });
