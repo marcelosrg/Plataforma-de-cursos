@@ -7,6 +7,8 @@ const app = express()
 
 app.use(adminJs.options.rootPath, AdminJsRouter)
 
+app.use(express.json())
+
 app.use(express.static('public'))
 
 app.use(router)
