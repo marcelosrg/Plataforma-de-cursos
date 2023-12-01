@@ -4,7 +4,7 @@ import { coursesController } from "./controllers/coursesController";
 import { episodesController } from "./controllers/episodesController";
 import { authUserConstroller } from "./controllers/authUserController";
 import { ensureAuth, ensureAuthViaQuery } from "./middlewares/auth";
-import { favoritesController } from "./controllers/FavoriteController";
+import { favoritesController } from "./controllers/favoriteController";
 
 
 

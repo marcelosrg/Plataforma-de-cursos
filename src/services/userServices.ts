@@ -5,7 +5,7 @@ export const userServices = {
      findByEmail: async (email: string) => {
           const user = await User.findOne({
                where: {
-                    email
+                    email: email
                }
           })
           return user

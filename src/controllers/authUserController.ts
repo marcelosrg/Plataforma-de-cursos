@@ -34,14 +34,14 @@ export const authUserConstroller = {
   },
 
 
-  //POST /auth/register 
+  //POST /auth/login 
 
   login: async(req: Request, res:Response) => {
     const { email, password } = req.body
     
       try {
         const user = await userServices.findByEmail(email)
-        if(!user) return res.status(404).json({ massage: 'E-mail não registrado.'})
+        if(!user) return res.status(404).json({ message: 'E-mail não registrado.'})
 
         user.checkPassword(password, (err, isSame)=> {
           if(err) return res.status(400).json({ massage: err.message})
