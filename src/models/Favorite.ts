@@ -6,8 +6,8 @@ import { CourseInstance } from "./Courses"
 import { UserInstance } from "./Users"
 
 export interface Favorite {
-  userId: number
-  courseId: number
+  userId: number | string
+  courseId: number | string
 }
 
 export interface FavoriteInstance extends Model<Favorite>, Favorite {
