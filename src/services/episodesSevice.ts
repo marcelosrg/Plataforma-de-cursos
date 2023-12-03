@@ -1,6 +1,8 @@
 import { Response } from "express";
 import path from "path";
 import fs from "fs";
+import { WatchTimeAttributes } from "../models/WatchTime";
+import { WatchTime } from "../models";
 
 export const episodesServices = {
   streamEpisodeToResponse: (
@@ -36,4 +38,40 @@ export const episodesServices = {
       fs.createReadStream(filePath).pipe(res);
     }
   },
+
+  getWatchTime: async (userId: number, episodeId: number) => {
+    const watchTime = await WatchTime.findOne({
+      attributes: ['seconds'],
+      where: {
+        userId: userId,
+        episodeId: episodeId
+      }
+    })
+    return watchTime
+  },
+
+  setWatchTime: async({userId, episodeId,seconds}: WatchTimeAttributes) => {
+
+    const watchTimeAlreadyExist = await WatchTime.findOne({
+      where: {
+        userId,
+        episodeId
+      }
+    })
+
+    if(watchTimeAlreadyExist){
+      watchTimeAlreadyExist.seconds = seconds
+      await watchTimeAlreadyExist.save()
+      return watchTimeAlreadyExist
+    }else{
+      const watchTime = await WatchTime.create({
+        userId,
+        episodeId,
+        seconds
+      })
+      return watchTime
+    }
+
+    
+  }
 };
