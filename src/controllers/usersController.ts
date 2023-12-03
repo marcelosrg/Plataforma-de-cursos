@@ -16,5 +16,18 @@ export const usersConstroller = {
         return res.status(400).json({ message: err.message })
       }
     }
+  },
+
+  //GET /users/account
+  show: async( req: AuthenticatedRequest, res: Response) => {
+    const currentUser = req.user!
+
+    try {
+      return res.json(currentUser)
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message })
+      }
+    }
   }
 };
