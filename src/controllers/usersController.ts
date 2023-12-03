@@ -29,5 +29,29 @@ export const usersConstroller = {
         return res.status(400).json({ message: err.message })
       }
     }
+  },
+
+  //PUT /users/account
+
+  uptade: async(req: AuthenticatedRequest, res: Response) => {
+    const { id } = req.user!
+    const { firstName, lastName, phone, email, birth } = req.body
+
+
+    try {
+      const uptadedUser = await userServices.update(id, {
+        firstName, 
+        lastName, 
+        phone, 
+        birth,
+        email
+      })
+      return res.json(uptadedUser)
+      
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message })
+      }
+    }
   }
 };
