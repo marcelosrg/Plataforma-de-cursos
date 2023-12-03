@@ -6,6 +6,7 @@ import { authUserConstroller } from "./controllers/authUserController";
 import { ensureAuth, ensureAuthViaQuery } from "./middlewares/auth";
 import { favoritesController } from "./controllers/favoriteController";
 import { likeController } from "./controllers/likeController";
+import { usersConstroller } from "./controllers/usersController";
 
 
 
@@ -30,6 +31,7 @@ router.post('/favorites', ensureAuth, favoritesController.create)
 router.delete('/favorites/:id', ensureAuth, favoritesController.delete)
 router.post('/likes', ensureAuth, likeController.save)
 router.delete('/likes/:id',ensureAuth, likeController.delete)
+router.get('/users/current/watching', ensureAuth, usersConstroller.watching)
 
 
 export {router}
